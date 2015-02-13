@@ -7,17 +7,7 @@ var filename = path.resolve(process.argv[2]);
 
 var json = require(filename);
 
-function visit(old) {
-    if (Array.isArray(old) || typeof(old) !== 'object') {
-        return old;
-    }
-    var sorted = {};
-    var keys = Object.keys(old).sort();
-    keys.forEach(function(key) {
-        sorted[key] = visit(old[key]);
-    });
-    return sorted;
-}
+var visit = require('./');
 
 var result = visit(json);
 
