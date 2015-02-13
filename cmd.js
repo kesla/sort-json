@@ -4,8 +4,7 @@ var fs = require('fs');
 var path = require('path');
 
 var filename = path.resolve(process.argv[2]);
-
-var json = require(filename);
+var json = JSON.parse(fs.readFileSync(filename));
 
 var visit = require('./');
 
