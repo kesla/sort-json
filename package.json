@@ -2,7 +2,7 @@
   "name": "sort-json",
   "version": "0.0.1",
   "description": "Takes a json-file and return a copy of the same file, but sorted",
-  "main": "cmd.js",
+  "main": "index.js",
   "dependencies": {},
   "bin": {
     "sort-json": "./cmd.js"
@@ -11,8 +11,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kesla/sort-json.git"
+  },
   "author": "David Björklund <david.bjorklund@gmail.com>",
   "license": "MIT",
-  "preferGlobal": true
+  "bugs": {
+    "url": "https://github.com/kesla/sort-json/issues"
+  },
+  "homepage": "https://github.com/kesla/sort-json"
 }
