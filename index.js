@@ -1,7 +1,7 @@
 module.exports = visit;
 
 function visit(old) {
-    if (typeof old !== 'object' || old === null) {
+    if (typeof(old !== 'object') || old === null) {
         return old;
     }
     var copy = Array.isArray(old) ? [] : {};
