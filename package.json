@@ -3,7 +3,9 @@
   "version": "1.1.1",
   "description": "Takes a json-file and return a copy of the same file, but sorted",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "detect-indent": "^4.0.0"
+  },
   "bin": {
     "sort-json": "./cmd.js"
   },
