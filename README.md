@@ -22,4 +22,4 @@ CLI usage
 ---------
 `sort-json file.json`
 
-For now sort-json takes no other arguments, so the origin file will be overritten by a sorted json file with 2-space indentation.
+For now sort-json takes no other arguments, so the original file will be overwritten by a sorted json file, keeping the indentation of the original file.
