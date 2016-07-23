@@ -1,19 +1,43 @@
 #!/usr/bin/env node
 
+// Core dependencies
 var fs = require('fs');
 var path = require('path');
+
+// NPM dependencies
 var detectIndent = require('detect-indent');
+var sortJson = require('./');
 
-var filename = path.resolve(process.argv[2]);
-var file = fs.readFileSync(filename, 'utf8');
+// Get all the files
+var files = process.argv.slice(2);
 
-// Try to detect the indentation and fall back to two spaces if unable.
-var indent = detectIndent(file).indent || '  ';
+files.forEach(readEachFile);
 
-var json = JSON.parse(file);
+function readEachFile(fileName) {
+  var filePath = path.resolve(fileName);
+  fs.readFile(filePath, 'utf8', readingFile);
 
-var visit = require('./');
+  function readingFile(err, file) {
+    if (err) {
+      console.error(err);
+      process.exit(0);
+    }
 
-var result = visit(json);
+    // Detect indentation if none is detectable fall back to two spaces
+    var indent = detectIndent(file).indent || '  ';
 
-fs.writeFile(filename, JSON.stringify(result, null, indent));
+    // Parse JSON
+    var json;
+    try {
+      json = JSON.parse(file);
+    } catch(err) {
+      return console.error(err + ' => ' + filePath);
+    }
+
+    // Sorting
+    var sortedObject = sortJson(json);
+
+    // Saving to file
+    fs.writeFile(filePath, JSON.stringify(sortedObject, null, indent));
+  }
+}
