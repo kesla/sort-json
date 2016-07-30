@@ -20,7 +20,7 @@ function readEachFile(fileName) {
   function readingFile(err, file) {
     if (err) {
       console.error(err);
-      process.exit(0);
+      process.exit(1);
     }
 
     // Detect indentation if none is detectable fall back to two spaces
