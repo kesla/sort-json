@@ -25,6 +25,8 @@ function readEachFile(fileName) {
 
     // Detect indentation if none is detectable fall back to two spaces
     var indent = detectIndent(file).indent || '  ';
+    // Detect end of line if any
+    var eol = /}(\r\n|\n|\r)$/.exec(file, 'gm');
 
     // Parse JSON
     var json;
@@ -38,6 +40,6 @@ function readEachFile(fileName) {
     var sortedObject = sortJson(json);
 
     // Saving to file
-    fs.writeFile(filePath, JSON.stringify(sortedObject, null, indent));
+    fs.writeFile(filePath, JSON.stringify(sortedObject, null, indent) + ((eol && eol.length === 2) ? eol[1] : ''));
   }
 }
