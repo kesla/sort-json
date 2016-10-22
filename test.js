@@ -1,8 +1,8 @@
 const chai = require('chai');
 const dirtyChai = require('dirty-chai');
-const expect = chai.expect;
 const visit = require('./index');
 
+const expect = chai.expect;
 chai.use(dirtyChai);
 
 describe('visit', () => {
@@ -17,8 +17,8 @@ describe('visit', () => {
   });
 
   it('sorts object by keys', () => {
-    const givenData = { foo: 123, bar: 456, baz: 789};
-    const expectedData = { bar: 456, baz: 789, foo: 123};
+    const givenData = { foo: 123, bar: 456, baz: 789 };
+    const expectedData = { bar: 456, baz: 789, foo: 123 };
 
     expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
   });
