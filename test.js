@@ -47,4 +47,53 @@ describe('visit', () => {
 
     expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
   });
+
+  it('returns empty object for empty object', () => {
+    const givenData = {};
+    const expectedData = {};
+
+    expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('returns empty array for empty array', () => {
+    const givenData = [];
+    const expectedData = [];
+
+    expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('returns null for null', () => {
+    const givenData = null;
+    const expectedData = null;
+
+    expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('returns true for true', () => {
+    const givenData = true;
+    const expectedData = true;
+
+    expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('returns false for false', () => {
+    const givenData = false;
+    const expectedData = false;
+
+    expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('returns number for number', () => {
+    const givenData = 123;
+    const expectedData = 123;
+
+    expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('returns string for string', () => {
+    const givenData = 'foo';
+    const expectedData = 'foo';
+
+    expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
+  });
 });
