@@ -1,6 +1,6 @@
 const chai = require('chai');
 const dirtyChai = require('dirty-chai');
-const visit = require('./index');
+const visit = require('../index');
 
 const expect = chai.expect;
 chai.use(dirtyChai);
