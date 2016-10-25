@@ -1,7 +1,7 @@
 sort-json
 =========
 
-Takes a json-file and return a copy of the same file, but with the keys sorted
+It takes a JSON file and returns a copy of the same file, but with the sorted keys.
 
 installation
 ------------
@@ -22,4 +22,9 @@ CLI usage
 ---------
 `sort-json file.json`
 
-For now sort-json takes no other arguments, so the original file will be overwritten by a sorted json file, keeping the indentation of the original file.
+For now sort-json takes no other arguments, so the original file will be overwritten by a sorted JSON file, keeping the indentation of the original file.
+
+tests
+-----
+
+`npm test`
