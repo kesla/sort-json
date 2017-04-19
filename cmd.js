@@ -40,6 +40,11 @@ function readEachFile(fileName) {
     var sortedObject = sortJson(json);
 
     // Saving to file
-    fs.writeFile(filePath, JSON.stringify(sortedObject, null, indent) + ((eol && eol.length === 2) ? eol[1] : ''));
+    fs.writeFile(filePath, JSON.stringify(sortedObject, null, indent) + ((eol && eol.length === 2) ? eol[1] : ''), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+    });
   }
 }
