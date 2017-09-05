@@ -21,8 +21,9 @@ var copy = sortJson(object);
 CLI usage
 ---------
 `sort-json file.json`
-
-For now sort-json takes no other arguments, so the original file will be overwritten by a sorted JSON file, keeping the indentation of the original file.
+or if you want to sort by key ("id" for example):
+`sort-json file.json -k id` or `sort-json file.json --key id`
+The original file will be overwritten by a sorted JSON file, keeping the indentation of the original file.
 
 tests
 -----
