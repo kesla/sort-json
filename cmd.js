@@ -10,7 +10,7 @@ var detectIndent = require('detect-indent');
 var sortJson = require('./');
 
 // Get all the files
-var files = process.argv.slice(2);
+var files = process.argv.slice(0).filter(arg => arg.endsWith('.json') || arg.endsWith('.rc'));
 var ignoreCase = _.includes(process.argv, '--ignore-case') || _.includes(process.argv, '-i');
 var reverse = _.includes(process.argv, '--reverse') || _.includes(process.argv, '-r');
 
