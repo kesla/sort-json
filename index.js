@@ -11,13 +11,9 @@ function visit(old, mainKey) {
             copy[key] = visit(old[key], null);
         });
     } else {
-    	var type = typeof(old[0][mainKey]);
     	for (var x = 0; x < old.length; x++){
     		old.sort(function(a, b){
-    			if (type !== 'number')
-    				return (a[mainKey] < b[mainKey]);
-    			else
-    				return (a[mainKey] - b[mainKey])
+                return (a[mainKey] - b[mainKey])
     		});
     	}
     	return (old);
