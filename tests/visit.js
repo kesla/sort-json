@@ -1,11 +1,17 @@
+/* eslint-disable */
+'use strict';
+
 const fs = require('fs');
 const path = require('path');
+const cp = require('child_process');
 const chai = require('chai');
 const dirtyChai = require('dirty-chai');
 const visit = require('../index');
 
 const expect = chai.expect;
 chai.use(dirtyChai);
+
+const tempFile = path.resolve(__dirname, './temp_file_test.json');
 
 describe('visit', () => {
   it('returns undefined for undefined', () => {
@@ -25,6 +31,21 @@ describe('visit', () => {
     expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
   });
 
+  it('sorts object by keys when using command', () => {
+    after(() => {
+      try { fs.unlinkSync(tempFile); } catch (e) {}
+    });
+
+    const givenData = { foo: 123, bar: 456, baz: 789 };
+    const expectedData = { bar: 456, baz: 789, foo: 123 };
+
+    fs.writeFileSync(tempFile, JSON.stringify(givenData), 'utf8');
+    cp.execSync(`node ./cmd ${tempFile}`);
+
+    // parse then stringify to remove white space issues
+    expect(JSON.stringify(JSON.parse(fs.readFileSync(tempFile, 'utf8')))).to.equal(JSON.stringify(expectedData));
+  });
+
   it('sorts object in reverse by keys if reverse enabled', () => {
     const opts = { reverse: true };
     const givenData = { abc: 123, def: 456, hij: 789 };
@@ -34,9 +55,8 @@ describe('visit', () => {
   });
 
   it('sorts object by keys and overwrites file if overwrite enabled', () => {
-    const tempFile = path.resolve(__dirname, './temp_file_test.json');
     after(() => {
-      fs.unlinkSync(path.resolve(tempFile));
+      try { fs.unlinkSync(tempFile); } catch (e) {}
     });
 
     const opts = { overwrite: true };
@@ -46,7 +66,9 @@ describe('visit', () => {
     fs.writeFileSync(tempFile, JSON.stringify(givenDataContent), 'utf8');
 
     expect(JSON.stringify(visit(givenData, opts))).to.equal(JSON.stringify(expectedData));
-    expect(JSON.parse(fs.readFileSync(tempFile, 'utf8'))).to.deep.equal(expectedData);
+
+    // parse then stringify to remove white space issues
+    expect(JSON.stringify(JSON.parse(fs.readFileSync(tempFile, 'utf8')))).to.equal(JSON.stringify(expectedData));
   });
 
   it('sorts object by keys and ignores case if ignoreCase enabled', () => {
@@ -63,20 +85,20 @@ describe('visit', () => {
       bar: {
         foo: 3,
         bar: 'lorem ipsum',
-        baz: [1, { foo2: 444 }],
+        baz: [1, { foo2: 444 }]
       },
       foo2: '',
-      bar2: null,
+      bar2: null
     };
     const expectedData = {
       bar: {
         bar: 'lorem ipsum',
         baz: [1, { foo2: 444 }],
-        foo: 3,
+        foo: 3
       },
       bar2: null,
       foo: [1, 2, 5, 2],
-      foo2: '',
+      foo2: ''
     };
 
     expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
