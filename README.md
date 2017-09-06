@@ -13,16 +13,20 @@ usage
 -----
 
 ```js
+var ignoreCase = false;
+
 var sortJson = require('sort-json');
 
-var copy = sortJson(object);
+var copy = sortJson(object, ignoreCase);
 ```
 
 CLI usage
 ---------
 `sort-json file.json`
 
-For now sort-json takes no other arguments, so the original file will be overwritten by a sorted JSON file, keeping the indentation of the original file.
+`-i` or `--ignore-case` to ignore case when sorting.
+
+`-r` or `--reverse` to reverse order z -> a
 
 tests
 -----
