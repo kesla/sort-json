@@ -16,7 +16,7 @@ usage
 var sortJson = require('sort-json');
 
 var copy = sortJson(object, key);
-and if there's no key 
+and if there is no key 
 var copy = sortJson(object, null);
 ```
 
