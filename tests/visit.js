@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const chai = require('chai');
 const dirtyChai = require('dirty-chai');
 const visit = require('../index');
@@ -21,6 +23,38 @@ describe('visit', () => {
     const expectedData = { bar: 456, baz: 789, foo: 123 };
 
     expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('sorts object in reverse by keys if reverse enabled', () => {
+    const opts = { reverse: true };
+    const givenData = { abc: 123, def: 456, hij: 789 };
+    const expectedData = { hij: 789, def: 456, abc: 123 };
+
+    expect(JSON.stringify(visit(givenData, opts))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('sorts object by keys and overwrites file if overwrite enabled', () => {
+    const tempFile = path.resolve(__dirname, './temp_file_test.json');
+    after(() => {
+      fs.unlinkSync(path.resolve(tempFile));
+    });
+
+    const opts = { overwrite: true };
+    const givenData = tempFile;
+    const givenDataContent = { foo: 123, bar: 456, baz: 789 };
+    const expectedData = { bar: 456, baz: 789, foo: 123 };
+    fs.writeFileSync(tempFile, JSON.stringify(givenDataContent), 'utf8');
+
+    expect(JSON.stringify(visit(givenData, opts))).to.equal(JSON.stringify(expectedData));
+    expect(JSON.parse(fs.readFileSync(tempFile, 'utf8'))).to.deep.equal(expectedData);
+  });
+
+  it('sorts object by keys and ignores case if ignoreCase enabled', () => {
+    const opts = { ignoreCase: true };
+    const givenData = { foo: 123, bar: 456, baz: 789, Quax: 999, Foo2: 123 };
+    const expectedData = { bar: 456, baz: 789, foo: 123, Foo2: 123, Quax: 999 };
+
+    expect(JSON.stringify(visit(givenData, opts))).to.equal(JSON.stringify(expectedData));
   });
 
   it('sorts nested object', () => {
