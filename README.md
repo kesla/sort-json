@@ -15,7 +15,9 @@ usage
 ```js
 var sortJson = require('sort-json');
 
-var copy = sortJson(object);
+var copy = sortJson(object, key);
+and if there's no key 
+var copy = sortJson(object, null);
 ```
 
 CLI usage
