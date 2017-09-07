@@ -9,7 +9,22 @@ var detectIndent = require('detect-indent');
 var sortJson = require('./');
 
 // Get all the files
-var files = process.argv.slice(2);
+var files = process.argv.splice(2, 3);
+var key = null;
+
+for (var x = 0; x < files.length; x++){
+  if (files[x] === "-k" || files[x] === '--key'){
+    if (files.length !== x + 2){
+      console.log("error: no key was given, ignoring the flag");
+      files.pop();
+      break;
+    } else {
+      key = files.pop();
+      files.pop();
+      break;
+    }
+  }
+}
 
 files.forEach(readEachFile);
 
@@ -37,7 +52,7 @@ function readEachFile(fileName) {
     }
 
     // Sorting
-    var sortedObject = sortJson(json);
+    var sortedObject = sortJson(json, key);
 
     // Saving to file
     fs.writeFile(filePath, JSON.stringify(sortedObject, null, indent) + ((eol && eol.length === 2) ? eol[1] : ''), function(err) {

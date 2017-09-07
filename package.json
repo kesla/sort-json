@@ -27,7 +27,7 @@
     "type": "git",
     "url": "https://github.com/kesla/sort-json.git"
   },
-  "author": "David Björklund <david.bjorklund@gmail.com>",
+  "authors": "David Björklund <david.bjorklund@gmail.com>, Nathan Schwarz <nathan.schwarz97@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kesla/sort-json/issues"
