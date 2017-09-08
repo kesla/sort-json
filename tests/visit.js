@@ -6,7 +6,7 @@ const path = require('path');
 const cp = require('child_process');
 const chai = require('chai');
 const dirtyChai = require('dirty-chai');
-const visit = require('../index');
+const visit = require('../app/index');
 
 const expect = chai.expect;
 chai.use(dirtyChai);
@@ -31,44 +31,12 @@ describe('visit', () => {
     expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
   });
 
-  it('sorts object by keys when using command', () => {
-    after(() => {
-      try { fs.unlinkSync(tempFile); } catch (e) {}
-    });
-
-    const givenData = { foo: 123, bar: 456, baz: 789 };
-    const expectedData = { bar: 456, baz: 789, foo: 123 };
-
-    fs.writeFileSync(tempFile, JSON.stringify(givenData), 'utf8');
-    cp.execSync(`node ./cmd ${tempFile}`);
-
-    // parse then stringify to remove white space issues
-    expect(JSON.stringify(JSON.parse(fs.readFileSync(tempFile, 'utf8')))).to.equal(JSON.stringify(expectedData));
-  });
-
   it('sorts object in reverse by keys if reverse enabled', () => {
     const opts = { reverse: true };
     const givenData = { abc: 123, def: 456, hij: 789 };
     const expectedData = { hij: 789, def: 456, abc: 123 };
 
     expect(JSON.stringify(visit(givenData, opts))).to.equal(JSON.stringify(expectedData));
-  });
-
-  it('sorts object by keys and overwrites file if overwrite enabled', () => {
-    after(() => {
-      try { fs.unlinkSync(tempFile); } catch (e) {}
-    });
-
-    const opts = { overwrite: true };
-    const givenData = tempFile;
-    const givenDataContent = { foo: 123, bar: 456, baz: 789 };
-    const expectedData = { bar: 456, baz: 789, foo: 123 };
-    fs.writeFileSync(tempFile, JSON.stringify(givenDataContent), 'utf8');
-
-    expect(JSON.stringify(visit(givenData, opts))).to.equal(JSON.stringify(expectedData));
-
-    // parse then stringify to remove white space issues
-    expect(JSON.stringify(JSON.parse(fs.readFileSync(tempFile, 'utf8')))).to.equal(JSON.stringify(expectedData));
   });
 
   it('sorts object by keys and ignores case if ignoreCase enabled', () => {

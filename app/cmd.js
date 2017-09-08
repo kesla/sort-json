@@ -14,9 +14,9 @@ var files = process.argv.slice(0).filter(arg => arg.endsWith('.json') || arg.end
 var ignoreCase = _.includes(process.argv, '--ignore-case') || _.includes(process.argv, '-i');
 var reverse = _.includes(process.argv, '--reverse') || _.includes(process.argv, '-r');
 
-sortJson(
+sortJson.overwrite(
   files.map(function (f) {
     return path.resolve(f);
   }),
-  { ignoreCase, reverse, overwrite: true }
+  { ignoreCase, reverse }
 );

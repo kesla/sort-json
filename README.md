@@ -19,12 +19,10 @@ const options1 = { ignoreCase: true, reverse: true };
 const copy = sortJson({ AA: 123, a: 1, b: 21 }, options1);
 // copy => { b: 21, AA: 123, a: 1 }
 
-const options2 = { overwrite: true };
-sortJson('some/absolute/path.json', options2);
+sortJson.overwrite('some/absolute/path.json');
 // sorts the json at absolute path and overwrites file, also returns sorted object
 
-const options3 = { overwrite: true };
-sortJson(['some/absolute/path1.json', 'some/absolute/path2.json'], options3);
+sortJson.overwrite(['some/absolute/path1.json', 'some/absolute/path2.json']);
 // sorts the json at absolute paths and overwrites files, also returns array of sorted objects
 ```
 
