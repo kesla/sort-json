@@ -4,7 +4,7 @@
   "description": "Takes a json-file and return a copy of the same file, but sorted",
   "main": "index.js",
   "dependencies": {
-    "detect-indent": "^4.0.0"
+    "lodash": "^4.17.4"
   },
   "bin": {
     "sort-json": "./cmd.js"
@@ -14,13 +14,13 @@
     "dirty-chai": "^1.2.2",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^2.0.1",
+    "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
-    "mocha": "^3.1.2"
+    "mocha": "^3.5.0"
   },
   "scripts": {
-    "test": "mocha --recursive tests",
+    "test": "mocha tests",
     "lint": "eslint tests"
   },
   "repository": {

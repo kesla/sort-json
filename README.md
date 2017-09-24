@@ -13,16 +13,26 @@ usage
 -----
 
 ```js
-var sortJson = require('sort-json');
+const sortJson = require('sort-json');
 
-var copy = sortJson(object);
+const options1 = { ignoreCase: true, reverse: true };
+const copy = sortJson({ AA: 123, a: 1, b: 21 }, options1);
+// copy => { b: 21, AA: 123, a: 1 }
+
+sortJson.overwrite('some/absolute/path.json');
+// sorts the json at absolute path and overwrites file, also returns sorted object
+
+sortJson.overwrite(['some/absolute/path1.json', 'some/absolute/path2.json']);
+// sorts the json at absolute paths and overwrites files, also returns array of sorted objects
 ```
 
 CLI usage
 ---------
-`sort-json file.json`
+`sort-json file.json` => sorts and overwrites file.json
 
-For now sort-json takes no other arguments, so the original file will be overwritten by a sorted JSON file, keeping the indentation of the original file.
+`-i` or `--ignore-case` to ignore case when sorting.
+
+`-r` or `--reverse` to reverse order z -> a
 
 tests
 -----
