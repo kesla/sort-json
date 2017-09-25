@@ -7,7 +7,7 @@
     "lodash": "^4.17.4"
   },
   "bin": {
-    "sort-json": "./cmd.js"
+    "sort-json": "./app/cmd.js"
   },
   "devDependencies": {
     "chai": "^3.5.0",
