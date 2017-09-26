@@ -1,6 +1,6 @@
 {
   "name": "sort-json",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Takes a json-file and return a copy of the same file, but sorted",
   "main": "index.js",
   "dependencies": {
