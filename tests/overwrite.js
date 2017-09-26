@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const chai = require('chai');
 const dirtyChai = require('dirty-chai');
-const sortJson = require('../app/index');
+const sortJson = require('../');
 
 const expect = chai.expect;
 chai.use(dirtyChai);

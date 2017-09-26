@@ -6,7 +6,7 @@ const path = require('path');
 const cp = require('child_process');
 const chai = require('chai');
 const dirtyChai = require('dirty-chai');
-const visit = require('../app/index');
+const visit = require('../');
 
 const expect = chai.expect;
 chai.use(dirtyChai);
