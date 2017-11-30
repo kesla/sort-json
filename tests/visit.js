@@ -39,6 +39,29 @@ describe('visit', () => {
     expect(JSON.stringify(visit(givenData, opts))).to.equal(JSON.stringify(expectedData));
   });
 
+  it('sorts object by keys with depth not set', () => {
+    const givenData = { def: 456, abc: { b: 1, a: 2 }, hij: 789 };
+    const expectedData = { abc: { a: 2, b: 1 }, def: 456, hij: 789 };
+
+    expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('sorts object by keys with depth = 1', () => {
+    const opts = { depth: 1 };
+    const givenData = { def: 456, abc: { b: 1, a: 2 }, hij: 789 };
+    const expectedData = { abc: { b: 1, a: 2 }, def: 456, hij: 789 };
+
+    expect(JSON.stringify(visit(givenData, opts))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('sorts object by keys with depth = 2', () => {
+    const opts = { depth: 2 };
+    const givenData = { def: 456, abc: { b: 1, a: 2 }, hij: 789 };
+    const expectedData = { abc: { a: 2, b: 1 }, def: 456, hij: 789 };
+
+    expect(JSON.stringify(visit(givenData, opts))).to.equal(JSON.stringify(expectedData));
+  });
+
   it('sorts object by keys and ignores case if ignoreCase enabled', () => {
     const opts = { ignoreCase: true };
     const givenData = { foo: 123, bar: 456, baz: 789, Quax: 999, Foo2: 123 };

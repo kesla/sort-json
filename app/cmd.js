@@ -13,10 +13,12 @@ var sortJson = require('./');
 var files = process.argv.slice(0).filter(arg => arg.endsWith('.json') || arg.endsWith('.rc'));
 var ignoreCase = _.includes(process.argv, '--ignore-case') || _.includes(process.argv, '-i');
 var reverse = _.includes(process.argv, '--reverse') || _.includes(process.argv, '-r');
+var dirtyDepth = process.argv.slice(0).filter(arg => arg.startsWith('-d') || arg.startsWith('--depth'));
+var depth = dirtyDepth.length > 0 ? parseInt(dirtyDepth[0].split('=')[1], 10) : Infinity;
 
 sortJson.overwrite(
   files.map(function (f) {
     return path.resolve(f);
   }),
-  { ignoreCase, reverse }
+  { ignoreCase, reverse, depth }
 );
