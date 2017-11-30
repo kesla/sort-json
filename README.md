@@ -15,7 +15,7 @@ usage
 ```js
 const sortJson = require('sort-json');
 
-const options1 = { ignoreCase: true, reverse: true };
+const options1 = { ignoreCase: true, reverse: true, depth: 1 };
 const copy = sortJson({ AA: 123, a: 1, b: 21 }, options1);
 // copy => { b: 21, AA: 123, a: 1 }
 
@@ -33,6 +33,8 @@ CLI usage
 `-i` or `--ignore-case` to ignore case when sorting.
 
 `-r` or `--reverse` to reverse order z -> a
+
+`-d` or `--depth` to chose the sorting depth on multidimensional objects
 
 tests
 -----
