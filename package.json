@@ -4,7 +4,7 @@
   "description": "Takes a json-file and return a copy of the same file, but sorted",
   "main": "index.js",
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.10"
   },
   "bin": {
     "sort-json": "./app/cmd.js"
@@ -17,7 +17,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
-    "mocha": "^3.5.0"
+    "mocha": "^5.2.0"
   },
   "scripts": {
     "test": "mocha tests",
