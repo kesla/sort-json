@@ -1,6 +1,27 @@
-var fs = require('fs');
+const fs = require('fs');
 
-var visit = require('./visit');
+const visit = require('./visit');
+
+/**
+ * Overwrite file with sorted json
+ * @param {String} path                  - absolutePath
+ * @param {Object} [options = {}]        - optional params
+ * @returns {*}
+ */
+function overwriteFile(path, options) {
+  let newData = null;
+  try {
+    newData = visit(JSON.parse(fs.readFileSync(path, 'utf8')), options);
+  } catch (e) {
+    console.error('Failed to retrieve json object from file');
+    throw e;
+  }
+  const newJson = JSON.stringify(newData, null, 2);
+  // append new line at EOF
+  const content = newJson[newJson.length - 1] === '\n' ? newJson : `${newJson}\n`;
+  fs.writeFileSync(path, content, 'utf8');
+  return newData;
+}
 
 /**
  * Sorts the files json with the visit function and then overwrites the file with sorted json
@@ -11,38 +32,9 @@ var visit = require('./visit');
  * @returns {*}                          - Whatever is returned by visit
  */
 function overwrite(absolutePaths, options) {
-  absolutePaths = arrIfNot(absolutePaths);
-  var results = absolutePaths.map(p => overwriteFile(p, options));
+  const paths = Array.isArray(absolutePaths) ? absolutePaths : [absolutePaths];
+  const results = paths.map(path => overwriteFile(path, options));
   return results.length > 1 ? results : results[0];
-}
-
-/**
- * Overwrite file with sorted json
- * @param {String} p                     - absolutePath
- * @param {Object} [options = {}]        - optional params
- * @returns {*}
- */
-function overwriteFile(p, options) {
-  var newData = null;
-  try {
-    newData = visit(JSON.parse(fs.readFileSync(p, 'utf8')), options);
-  } catch (e) {
-    console.error('Failed to retrieve json object from file');
-    throw e;
-  }
-  var newJson = JSON.stringify(newData, null, 2);
-  // append new line at EOF
-  var content = newJson[newJson.length - 1] === '\n' ? newJson : newJson + '\n';
-  fs.writeFileSync(p, content, 'utf8');
-  return newData;
-}
-
-function arrIfNot(x) {
-  if (Array.isArray(x)) {
-    return x;
-  }
-
-  return [x];
 }
 
 module.exports = overwrite;

@@ -21,7 +21,7 @@
   },
   "scripts": {
     "test": "mocha tests",
-    "lint": "eslint tests"
+    "lint": "eslint tests && eslint app"
   },
   "repository": {
     "type": "git",
