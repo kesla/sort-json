@@ -1,22 +1,23 @@
+
 sort-json
 =========
 
 It takes a JSON file and returns a copy of the same file, but with the sorted keys.
 
-installation
+Installation
 ------------
 
 ` [sudo] npm -g install sort-json`
 
 
-usage
+Usage
 -----
 
 ```js
 const sortJson = require('sort-json');
 
-const options1 = { ignoreCase: true, reverse: true, depth: 1 };
-const copy = sortJson({ AA: 123, a: 1, b: 21 }, options1);
+const options = { ignoreCase: true, reverse: true, depth: 1};
+const copy = sortJson({ AA: 123, a: 1, b: 21 }, options);
 // copy => { b: 21, AA: 123, a: 1 }
 
 sortJson.overwrite('some/absolute/path.json');
@@ -28,15 +29,35 @@ sortJson.overwrite(['some/absolute/path1.json', 'some/absolute/path2.json']);
 
 CLI usage
 ---------
-`sort-json file.json` => sorts and overwrites file.json
+`sort-json filename [options]`
+Sorts and overwrites .json or .rc files.
 
-`-i` or `--ignore-case` to ignore case when sorting.
+_Example_
+`sort-json test.json --ignore-case`
 
-`-r` or `--reverse` to reverse order z -> a
+ **Options**
 
-`-d` or `--depth` to chose the sorting depth on multidimensional objects
+`-i, --ignore-case`
+Ignore case when sorting.
 
-tests
+`-r, --reverse`
+Reverse the ordering z -> a
+
+`-d, --depth=DEPTH`
+The sorting _DEPTH_ on multidimensional objects.
+Use a number greater then 0 for the _DEPTH_ value.
+
+`--indent-size=SIZE, --spaces=SIZE`
+Formats the file content with an indentation of _SIZE_ spaces  (default: detects the used indentation of the file).
+Use a number greater then 0 for the _SIZE_ value.
+
+Upgrade to version 2.x
+----------------------
+
+sort-json 2.0.0 will create a different output when the source JSON file does not use an indent size of 2 spaces.
+Use `--indent-size=2` to always create an output file with 2 spaces.
+
+Tests
 -----
 
 `npm test`

@@ -4,7 +4,8 @@
   "description": "Takes a json-file and return a copy of the same file, but sorted",
   "main": "index.js",
   "dependencies": {
-    "lodash": "^4.17.10"
+    "detect-indent": "^5.0.0",
+    "minimist": "^1.2.0"
   },
   "bin": {
     "sort-json": "./app/cmd.js"
