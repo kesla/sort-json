@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "detect-indent": "^5.0.0",
+    "detect-newline": "^2.1.0",
     "minimist": "^1.2.0"
   },
   "bin": {

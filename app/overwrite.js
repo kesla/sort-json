@@ -1,5 +1,6 @@
 const fs = require('fs');
 const detectIndent = require('detect-indent');
+const detectNewline = require('detect-newline');
 
 const visit = require('./visit');
 
@@ -31,11 +32,17 @@ function overwriteFile(path, options) {
     indent = detectIndent(fileContent).indent || DEFAULT_INDENT_SIZE;
   }
 
+  const newLine = detectNewline(fileContent) || '\n';
   const newJson = JSON.stringify(newData, null, indent);
 
-  // append new line at EOF
-  const content = newJson[newJson.length - 1] === '\n' ? newJson : `${newJson}\n`;
-  fs.writeFileSync(path, content, 'utf8');
+  // Append a new line at EOF
+  let newFileContent = `${newJson}\n`;
+
+  if (newLine !== '\n') {
+    newFileContent = newFileContent.replace(/\n/g, newLine);
+  }
+
+  fs.writeFileSync(path, newFileContent, 'utf8');
   return newData;
 }
 
