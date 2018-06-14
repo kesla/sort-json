@@ -71,4 +71,24 @@ describe('overwrite', () => {
     const result = fs.readFileSync(tempFile, 'utf8');
     expect(result).to.equal('{\n    "foo": 123\n}\n');
   });
+
+  it('persists the \\n end-of-line marker when modifying the file', () => {
+    const givenData = '{\n    "foo": 123,\n    "bar": 456\n}\n';
+
+    fs.writeFileSync(tempFile, givenData, 'utf8');
+    sortJson.overwrite(tempFile);
+
+    const result = fs.readFileSync(tempFile, 'utf8');
+    expect(result).to.equal('{\n    "bar": 456,\n    "foo": 123\n}\n');
+  });
+
+  it('persists the \\r\\n end-of-line marker when modifying the file', () => {
+    const givenData = '{\r\n    "foo": 123,\r\n    "bar": 456\r\n}\r\n';
+
+    fs.writeFileSync(tempFile, givenData, 'utf8');
+    sortJson.overwrite(tempFile);
+
+    const result = fs.readFileSync(tempFile, 'utf8');
+    expect(result).to.equal('{\r\n    "bar": 456,\r\n    "foo": 123\r\n}\r\n');
+  });
 });
