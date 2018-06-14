@@ -61,4 +61,14 @@ describe('overwrite', () => {
     // parse then stringify to remove white space issues
     expect(JSON.stringify(JSON.parse(fs.readFileSync(tempFile, 'utf8')))).to.equal(JSON.stringify(expectedData));
   });
+
+  it('persists the indentation when modifying the file', () => {
+    const givenData = { foo: 123 };
+
+    fs.writeFileSync(tempFile, JSON.stringify(givenData, null, 4), 'utf8');
+    sortJson.overwrite(tempFile);
+
+    const result = fs.readFileSync(tempFile, 'utf8');
+    expect(result).to.equal('{\n    "foo": 123\n}\n');
+  });
 });
