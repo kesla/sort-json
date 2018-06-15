@@ -1,17 +1,12 @@
-
-sort-json
-=========
+# sort-json [![Build Status](https://travis-ci.org/kesla/sort-json.svg?branch=master)](https://travis-ci.org/kesla/sort-json)
 
 It takes a JSON file and returns a copy of the same file, but with the sorted keys.
 
-Installation
-------------
+## Installation
 
 ` [sudo] npm -g install sort-json`
 
-
-Usage
------
+## Usage
 
 ```js
 const sortJson = require('sort-json');
@@ -27,8 +22,8 @@ sortJson.overwrite(['some/absolute/path1.json', 'some/absolute/path2.json']);
 // sorts the json at absolute paths and overwrites files, also returns array of sorted objects
 ```
 
-CLI usage
----------
+## CLI usage
+
 `sort-json filename [options]`
 Sorts and overwrites .json or .rc files.
 
@@ -51,13 +46,11 @@ Use a number greater then 0 for the _DEPTH_ value.
 Formats the file content with an indentation of _SIZE_ spaces  (default: detects the used indentation of the file).
 Use a number greater then 0 for the _SIZE_ value.
 
-Upgrade to version 2.x
-----------------------
+## Upgrade to version 2.x
 
 sort-json 2.0.0 will create a different output when the source JSON file does not use an indent size of 2 spaces.
 Use `--indent-size=2` to always create an output file with 2 spaces.
 
-Tests
------
+## Tests
 
 `npm test`
