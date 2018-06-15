@@ -12,6 +12,7 @@ const alias = {
   reverse: ['r'],
   ignoreCase: ['ignore-case', 'i'],
   indentSize: ['indent-size', 'spaces'],
+  noFinalNewLine: ['no-final-newline', 'nn'],
 };
 
 const argv = minimist(process.argv.slice(2), { alias });

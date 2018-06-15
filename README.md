@@ -32,19 +32,23 @@ _Example_
 
  **Options**
 
-`-i, --ignore-case`
+`--ignore-case, -i`\
 Ignore case when sorting.
 
-`-r, --reverse`
+`--reverse, -r`\
 Reverse the ordering z -> a
 
-`-d, --depth=DEPTH`
+`--depth=DEPTH, -d`\
 The sorting _DEPTH_ on multidimensional objects.
 Use a number greater then 0 for the _DEPTH_ value.
 
-`--indent-size=SIZE, --spaces=SIZE`
+`--indent-size=SIZE, --spaces=SIZE`\
 Formats the file content with an indentation of _SIZE_ spaces  (default: detects the used indentation of the file).
 Use a number greater then 0 for the _SIZE_ value.
+
+`--no-final-newline, -nn`\
+No final new line will be added to the end of the file.
+
 
 ## Upgrade to version 2.x
 

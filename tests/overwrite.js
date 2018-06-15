@@ -91,4 +91,14 @@ describe('overwrite', () => {
     const result = fs.readFileSync(tempFile, 'utf8');
     expect(result).to.equal('{\r\n    "bar": 456,\r\n    "foo": 123\r\n}\r\n');
   });
+
+  it('does not insert an end-of-line marker if noFinalNewLine is enabled', () => {
+    const givenData = { foo: 123 };
+
+    fs.writeFileSync(tempFile, JSON.stringify(givenData, null, 4), 'utf8');
+    sortJson.overwrite(tempFile, { noFinalNewLine: true });
+
+    const result = fs.readFileSync(tempFile, 'utf8');
+    expect(result).to.equal('{\n    "foo": 123\n}');
+  });
 });
