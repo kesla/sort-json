@@ -33,10 +33,12 @@ function overwriteFile(path, options) {
   }
 
   const newLine = detectNewline(fileContent) || '\n';
-  const newJson = JSON.stringify(newData, null, indent);
+  let newFileContent = JSON.stringify(newData, null, indent);
 
-  // Append a new line at EOF
-  let newFileContent = `${newJson}\n`;
+  if (!(options && options.noFinalNewLine)) {
+    // Append a new line at EOF
+    newFileContent += '\n';
+  }
 
   if (newLine !== '\n') {
     newFileContent = newFileContent.replace(/\n/g, newLine);
