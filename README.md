@@ -61,12 +61,12 @@ for example:
 
 `$.foo.bar.$` : will sort all the arrays contained in every bar of foo in the main array :
 
-`
-[\
-  {\
-    foo: {\
-      bar: [ this array will be sorted ]\
-    }\
+```
+[
+  {
+    foo: {
+      bar: [ this array will be sorted ]
+    }
   },
   {
     foo: {
@@ -74,7 +74,7 @@ for example:
     }
   }
 ]
-`
+```
 
 
 `--DESC'`\
