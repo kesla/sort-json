@@ -54,7 +54,7 @@ Will sort an array wether it's nested in an object or even in an other array (us
 
 the Key must be formated this way :
 
-`$` : is an array.
+`$` : is an array.\
 `.key`: is a properity.
 
 for example:
