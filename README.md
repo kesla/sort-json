@@ -49,6 +49,36 @@ Use a number greater then 0 for the _SIZE_ value.
 `--no-final-newline, -nn`\
 No final new line will be added to the end of the file.
 
+`--key '$._id', -k '$._id'`\
+Will sort an array wether it's nested in an object or even in an other array (using mongoDB like operators) :
+
+the Key must be formated this way :
+
+`$` : is an array.
+`.key`: is a properity.
+
+for example:
+
+`$.foo.bar.$` : will sort all the arrays contained in every bar of foo in the main array :
+
+`
+[
+  {
+    foo: {
+      bar: [ this array will be sorted ]
+    }
+  },
+  {
+    foo: {
+      bar: [ this array will be sorted too ]
+    }
+  }
+]
+`
+
+
+`--DESC'`\
+Reverse the ordering of an array (to use with `--key` option).
 
 ## Upgrade to version 2.x
 
