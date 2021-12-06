@@ -4,7 +4,7 @@ It takes a JSON file and returns a copy of the same file, but with the sorted ke
 
 ## Installation
 
-` [sudo] npm -g install sort-json`
+`[sudo] npm -g install sort-json`
 
 ## Usage
 
@@ -24,13 +24,13 @@ sortJson.overwrite(['some/absolute/path1.json', 'some/absolute/path2.json'], opt
 
 ## CLI usage
 
-`sort-json filename [options]`
+`sort-json [options] [filenames]`
 Sorts and overwrites .json or .rc files.
 
 _Example_
-`sort-json test.json --ignore-case`
+`sort-json --ignore-case test.json`
 
- **Options**
+### Options
 
 `--ignore-case, -i`\
 Ignore case when sorting.
@@ -49,6 +49,12 @@ Use a number greater then 0 for the _SIZE_ value.
 `--no-final-newline, -nn`\
 No final new line will be added to the end of the file.
 
+### Files
+
+List of json files that should be sorted.
+The paths can be absolute or relative to the current directory.
+
+Filenames must end with `.json` or `.rc`. All other files are ignored.
 
 ## Upgrade to version 2.x
 
