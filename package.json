@@ -29,6 +29,9 @@
     "type": "git",
     "url": "https://github.com/kesla/sort-json.git"
   },
+  "files": [
+    "app"
+  ],
   "author": "David Björklund <david.bjorklund@gmail.com>",
   "license": "MIT",
   "bugs": {
