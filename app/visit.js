@@ -20,7 +20,7 @@ function visit(old, options) {
   const level = sortOptions.level || 1;
   const processing = level <= depth;
 
-  if (typeof (old) !== 'object' || old === null) {
+  if (typeof (old) !== 'object' || old === null || (!processing && !reverse)) {
     return old;
   }
 
