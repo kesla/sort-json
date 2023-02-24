@@ -14,7 +14,6 @@
 function visit(old, options) {
   const sortOptions = options || {};
 
-  const ignoreCase = sortOptions.ignoreCase || false;
   const reverse = sortOptions.reverse || false;
   const depth = sortOptions.depth || Infinity;
   const level = sortOptions.level || 1;
@@ -27,9 +26,26 @@ function visit(old, options) {
   const copy = Array.isArray(old) ? [] : {};
   let keys = Object.keys(old);
   if (processing) {
-    keys = ignoreCase ?
-      keys.sort((left, right) => left.toLowerCase().localeCompare(right.toLowerCase())) :
-      keys.sort();
+    const sorter = (left, right, { ignoreCase, secondaryValueSort }) => {
+      if (secondaryValueSort && old[left] instanceof Object && old[right] instanceof Object) {
+        const sortedLeft = visit(old[left], options);
+        const sortedRight = visit(old[right], options);
+
+        if (ignoreCase) {
+          return JSON.stringify(sortedLeft)
+            .toLowerCase()
+            .localeCompare(JSON.stringify(sortedRight).toLowerCase());
+        }
+        return JSON.stringify(sortedLeft).localeCompare(JSON.stringify(sortedRight));
+      }
+
+      if (ignoreCase) {
+        return left.toLowerCase().localeCompare(right.toLowerCase());
+      }
+
+      return left.localeCompare(right);
+    };
+    keys.sort((left, right) => sorter(left, right, sortOptions));
   }
 
   if (reverse) {
@@ -39,7 +55,13 @@ function visit(old, options) {
   keys.forEach((key) => {
     const subSortOptions = Object.assign({}, sortOptions);
     subSortOptions.level = level + 1;
-    copy[key] = visit(old[key], subSortOptions);
+    const sortedValue = visit(old[key], subSortOptions);
+
+    if (Array.isArray(copy)) {
+      copy.push(sortedValue);
+    } else {
+      copy[key] = sortedValue;
+    }
   });
 
   return copy;

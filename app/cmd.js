@@ -10,6 +10,7 @@ const sortJson = require('./');
 const alias = {
   depth: ['d'],
   reverse: ['r'],
+  secondaryValueSort: ['secondary-sort-by-value', 'sv'],
   ignoreCase: ['ignore-case', 'i'],
   indentSize: ['indent-size', 'spaces'],
   noFinalNewLine: ['no-final-newline', 'nn'],
