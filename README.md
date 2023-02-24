@@ -38,6 +38,35 @@ Ignore case when sorting.
 `--reverse, -r`\
 Reverse the ordering z -> a
 
+`--secondary-sort-by-value, -sv`\
+Sort arrays of objects with identical keys by their value as well.
+
+```
+[
+    {
+        "b":"c",
+        "a": "b",
+        "g": "h"
+    },
+    {
+        "b":"c",
+        "a": "a",
+        "g": "h"
+    },
+] -> [
+    {
+        "a": "a",
+        "b":"c",
+        "g": "h"
+    },
+    {
+        "a": "b",
+        "b":"c",
+        "g": "h"
+    },
+]
+```
+
 `--depth=DEPTH, -d`\
 The sorting _DEPTH_ on multidimensional objects.
 Use a number greater then 0 for the _DEPTH_ value.

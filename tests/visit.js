@@ -143,4 +143,279 @@ describe('visit', () => {
 
     expect(JSON.stringify(visit(givenData))).to.equal(JSON.stringify(expectedData));
   });
+
+  it('sorts nested array of similar objects by value case-invariant', () => {
+    const givenData = {
+      "abc": "def",
+      "aa": [
+        {
+          "y": "c",
+          "g": 3,
+          "a": "b",
+        },
+        {
+          "g": 3,
+          "y": "c",
+          "a": "b",
+          "b": "b",
+        },
+        {
+          "a": "b",
+          "y": "c",
+          "g": 3,
+        },
+      ],
+    };
+    const expectedData = {
+      "aa": [
+        {
+          "a": "b",
+          "b": "b",
+          "g": 3,
+          "y": "c",
+        },
+        {
+          "a": "b",
+          "g": 3,
+          "y": "c",
+        },
+        {
+          "a": "b",
+          "g": 3,
+          "y": "c",
+        },
+      ],
+      "abc": "def",
+    };
+
+    const options = {
+      secondaryValueSort: true,
+      ignoreCase: true,
+    };
+
+    expect(JSON.stringify(visit(givenData, options))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('sorts nested array of objects by value case-invariant', () => {
+    const givenData = [
+      {
+        "y": "c",
+        "g": 3,
+        "a": "b",
+      },
+      {
+        "a": "aa",
+        "g": 4,
+        "y": 100,
+      },
+      {
+        "g": 1,
+        "y": "b",
+        "a": "h",
+      },
+      {
+        "a": "a",
+        "g": 4,
+        "y": 100,
+      },
+      {
+        "a": "aa",
+        "g": 3,
+        "y": 100,
+      },
+      {
+        "y": 101,
+        "a": "A",
+        "g": 3,
+      },
+    ];
+    const expectedData = [
+      {
+        "a": "A",
+        "g": 3,
+        "y": 101
+      },
+      {
+        "a": "a",
+        "g": 4,
+        "y": 100
+      },
+      {
+        "a": "aa",
+        "g": 3,
+        "y": 100
+      },
+      {
+        "a": "aa",
+        "g": 4,
+        "y": 100
+      },
+      {
+        "a": "b",
+        "g": 3,
+        "y": "c"
+      },
+      {
+        "a": "h",
+        "g": 1,
+        "y": "b"
+      },
+    ];
+
+    const options = {
+      secondaryValueSort: true,
+      ignoreCase: true,
+    };
+
+    expect(JSON.stringify(visit(givenData, options))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('sorts nested array of objects by value case-variant', () => {
+    const givenData = [
+      {
+        "y": "c",
+        "g": 3,
+        "a": "b",
+      },
+      {
+        "a": "aa",
+        "g": 4,
+        "y": 100,
+      },
+      {
+        "a": "aa",
+        "g": 3,
+        "y": 100,
+      },
+      {
+        "g": 1,
+        "y": "b",
+        "a": "h",
+      },
+      {
+        "a": "a",
+        "g": 4,
+        "y": 100,
+      },
+      {
+        "y": 101,
+        "a": "A",
+        "g": 3,
+      },
+    ];
+    const expectedData = [
+      {
+        "a": "A",
+        "g": 3,
+        "y": 101
+      },
+      {
+        "a": "a",
+        "g": 4,
+        "y": 100
+      },
+      {
+        "a": "aa",
+        "g": 3,
+        "y": 100
+      },
+      {
+        "a": "aa",
+        "g": 4,
+        "y": 100
+      },
+      {
+        "a": "b",
+        "g": 3,
+        "y": "c"
+      },
+      {
+        "a": "h",
+        "g": 1,
+        "y": "b"
+      }
+    ];
+
+    const options = {
+      secondaryValueSort: true,
+      ignoreCase: false,
+    };
+
+    expect(JSON.stringify(visit(givenData, options))).to.equal(JSON.stringify(expectedData));
+  });
+
+  it('sorts nested array of objects not value', () => {
+    const givenData = [
+      {
+        "y": "c",
+        "g": 3,
+        "a": "b",
+      },
+      {
+        "a": "aa",
+        "g": 4,
+        "y": 100,
+      },
+      {
+        "a": "aa",
+        "g": 3,
+        "y": 100,
+      },
+      {
+        "g": 1,
+        "y": "b",
+        "a": "h",
+      },
+      {
+        "a": "a",
+        "g": 4,
+        "y": 100,
+      },
+      {
+        "y": 101,
+        "a": "A",
+        "g": 3,
+      },
+    ];
+    const expectedData = [
+      {
+        "a": "b",
+        "g": 3,
+        "y": "c",
+      },
+      {
+        "a": "aa",
+        "g": 4,
+        "y": 100,
+      },
+      {
+        "a": "aa",
+        "g": 3,
+        "y": 100,
+      },
+      {
+        "a": "h",
+        "g": 1,
+        "y": "b",
+      },
+      {
+        "a": "a",
+        "g": 4,
+        "y": 100,
+      },
+      {
+        "a": "A",
+        "g": 3,
+        "y": 101,
+      }
+    ];
+
+    const options = {
+      secondaryValueSort: false,
+      ignoreCase: false,
+    };
+
+    expect(JSON.stringify(visit(givenData, options))).to.equal(JSON.stringify(expectedData));
+  });
+
 });
