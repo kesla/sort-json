@@ -20,6 +20,7 @@ function overwriteFile(path, options) {
     fileContent = fs.readFileSync(path, 'utf8');
     newData = visit(JSON.parse(fileContent), options);
   } catch (e) {
+    /* eslint-disable-next-line no-console */
     console.error('Failed to retrieve json object from file');
     throw e;
   }
